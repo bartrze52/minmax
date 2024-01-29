@@ -1,0 +1,77 @@
+﻿<Window x:Class="minmax.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:minmax"
+        mc:Ignorable="d"
+              Title="MainWindow" Height="350" Width="525"
+        MinWidth="300" MinHeight="200" MaxWidth="800" MaxHeight="600">
+
+    <!-- ResizeMode="No" w Window żeby zablokować możliwość zmiany rozmiaru okna -->
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+        <RowDefinition/>
+        <RowDefinition/>
+    </Grid.RowDefinitions>
+    <StackPanel Grid.Column="0" Grid.Row="0">
+        <RadioButton Content="Opcja 1" GroupName="Options" Checked="RadioButton_Checked"/>
+        <RadioButton Content="Opcja 2" GroupName="Options" Checked="RadioButton_Checked"/>
+        <RadioButton Content="Opcja 3" GroupName="Options" Checked="RadioButton_Checked"/>
+        <TextBlock x:Name="textBlock" Text="Tekst do zmiany" Margin="0,10,0,0"/>
+    </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="0">
+            <RadioButton x:Name="option1" Content="Opcja 1" GroupName="ColorOptions"/>
+            <RadioButton x:Name="option2" Content="Opcja 2" GroupName="ColorOptions"/>
+            <RadioButton x:Name="option3" Content="Opcja 3" GroupName="ColorOptions"/>
+            <TextBlock x:Name="textBlock2" Text="Tekst do zmiany" Margin="0,10,0,0">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsChecked, ElementName=option1}" Value="True">
+                                <Setter Property="Foreground" Value="Red"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding IsChecked, ElementName=option2}" Value="True">
+                                <Setter Property="Foreground" Value="Green"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding IsChecked, ElementName=option3}" Value="True">
+                                <Setter Property="Foreground" Value="Blue"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+        </StackPanel>
+        <StackPanel Grid.Column="0" Grid.Row="1">
+            <ToggleButton x:Name="button" Content="Zmień obrazek (DataTrigger)">
+ 
+            </ToggleButton>
+            <Image x:Name="image" Width="100" Height="100" Margin="0,10,0,0">
+                <Image.Style>
+                    <Style TargetType="Image">
+                        <Style.Triggers>
+                            <DataTrigger 
+                                Binding="{Binding IsChecked, ElementName=button}" Value="false">
+                                <Setter Property="Source" Value="darkin.jpg"/>
+                            </DataTrigger>
+                            <DataTrigger 
+                                Binding="{Binding IsChecked, ElementName=button}" Value="true">
+                                <Setter Property="Source" Value="shadow.jpg"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Image.Style>
+            </Image>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Grid.Row="1">
+            <Button Content="Zmień obrazek (Click)" Click="Button_Click_2"/>
+            <Image x:Name="image2" Source="kat.jpg" Width="100" Height="100" Margin="0,10,0,0"/>
+        </StackPanel>
+    </Grid>
+</Window>
